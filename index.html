@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -7,442 +7,113 @@
 
   <!-- Roboto font -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --purple-900: #4a0f67; /* darker */
-      --purple: #6A1B9A;     /* primary */
-      --purple-500: #9C27B0; /* accent */
-      --white: #ffffff;
-      --black: #000000;
-      --max-width: 1000px;
-      --radius: 12px;
-      --ease: cubic-bezier(.2,.9,.25,1);
-    }
-
-    /* Reset & base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color:var(--black);
-      background:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
-
-    a{color:inherit;text-decoration:none}
-
-    /* Header */
-    header{
-      position:sticky;
-      top:0;
-      z-index:40;
-      backdrop-filter: blur(6px);
-      background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
-      border-bottom: 1px solid rgba(106,27,154,0.06);
-    }
-    .nav{
-      max-width:var(--max-width);
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      padding:12px 20px;
-    }
-    .title{
-      font-weight:700;
-      letter-spacing:0.2px;
-      color:var(--purple-900);
-      font-size:16px;
-    }
-    .nav-spacer{flex:1}
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      background:var(--purple);
-      color:var(--white);
-      border-radius:8px;
-      font-weight:600;
-      transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
-      box-shadow: 0 6px 18px rgba(106,27,154,0.12);
-    }
-    .btn:focus{outline:3px solid rgba(156,39,176,0.12); outline-offset:2px}
-    .btn:hover{ transform: translateY(-2px) scale(1.02); background:var(--purple-500) }
-
-    /* Main layout */
-    main{ max-width:var(--max-width); margin:36px auto; padding:0 20px 80px; }
-
-    section{
-      background:var(--white);
-      padding:28px;
-      margin-bottom:28px;
-      border-radius:12px;
-      box-shadow: 0 6px 30px rgba(106,27,154,0.03);
-      transform-origin: center;
-      opacity:0;
-      transform: translateY(14px);
-      transition: opacity .6s var(--ease), transform .6s var(--ease);
-      will-change: transform, opacity;
-    }
-    section.in-view{ opacity:1; transform: translateY(0) }
-
-    /* Section headings */
-    h2{
-      margin:0 0 8px 0;
-      color:var(--purple);
-      font-size:20px;
-      font-weight:700;
-    }
-    p.lead{ margin:0 0 12px 0; color:#222; font-weight:400; }
-
-    /* Registration */
-    .reg-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between }
-    .reg-intro{ max-width:72%; min-width:220px; }
-    .reg-cta{ margin-left:auto }
-
-    /* Info formatting */
-    .sub{
-      font-weight:600;
-      margin-top:12px;
-      margin-bottom:6px;
-      color:var(--purple-500);
-    }
-    ul{ margin:6px 0 12px 18px; }
-    li{ margin-bottom:6px; color:#111 }
-
-    /* Judging table */
-    .table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:8px;
-      font-size:15px;
-    }
-    .table th, .table td{
-      padding:10px 12px;
-      border-bottom:1px solid rgba(0,0,0,0.06);
-      text-align:left;
-      vertical-align:top;
-    }
-    .table th{
-      background:linear-gradient(90deg, rgba(106,27,154,0.06), rgba(156,39,176,0.02));
-      color:var(--purple-900);
-      font-weight:700;
-      width:28%;
-    }
-
-    /* Organizers grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap:18px;
-      margin-top:10px;
-    }
-    .card{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:10px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(106,27,154,0.02), rgba(156,39,176,0.005));
-      transition: transform .18s var(--ease), box-shadow .18s var(--ease), opacity .3s;
-    }
-    .card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(106,27,154,0.06) }
-    .avatar{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      flex-shrink:0;
-      display:inline-grid;
-      place-items:center;
-      background:linear-gradient(180deg,var(--purple),var(--purple-500));
-      color:var(--white);
-      font-weight:700;
-      font-size:14px;
-    }
-    .meta{ display:flex; flex-direction:column; }
-    .meta .name{ font-weight:700; color:#111 }
-    .meta .role{ font-size:13px; color:#222; opacity:.8 }
-
-    /* Footer */
-    footer{ text-align:center; padding:18px 10px; color:#444; font-size:13px; }
-    .logo{
-      width:72px;
-      height:72px;
-      margin:0 auto 8px;
-      display:inline-grid;
-      place-items:center;
-      border-radius:12px;
-      background:linear-gradient(180deg,var(--purple),var(--purple-500));
-      color:var(--white);
-      font-weight:700;
-      box-shadow: 0 10px 28px rgba(106,27,154,0.08);
-      transform: scale(.98);
-      transition: transform .5s var(--ease);
-    }
-    .logo.load{ transform: scale(1) translateY(0) }
-
-    /* Responsiveness */
-    @media (max-width:720px){
-      .reg-intro{ max-width:100% }
-      .reg-row{ flex-direction:column; align-items:stretch }
-      .btn{ width:100% }
-      main{ margin:20px auto; padding:0 16px 60px }
-    }
-
-    /* Small helper */
-    .muted{ color:#666; font-size:13px }
-    .small{ font-size:13px }
-
-    /* Accessibility focus for cards */
-    .card:focus-within{ outline: 3px solid rgba(156,39,176,0.08); border-radius:10px }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header role="banner" aria-label="Top header">
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="title">AIChE Southern Asia Parliamentary Debate Competition 2025</div>
-    <div class="nav-spacer" aria-hidden="true"></div>
-    <a class="btn" href="#" id="register-top" aria-label="Register now for the debate">Register Now</a>
-  </nav>
-</header>
-
-<main role="main">
+<main>
 
   <!-- Registration Section -->
-  <section id="registration" tabindex="-1" aria-labelledby="reg-heading">
+  <section id="registration" aria-labelledby="reg-heading">
     <h2 id="reg-heading">Registration</h2>
-    <div class="reg-row">
-      <div class="reg-intro">
-        <p class="lead">
-          The AIChE Southern Asia Parliamentary Debate Competition 2025 brings together student chapters to debate engineering and sustainability topics.
-          Participants will gain experience in structured public speaking, teamwork, and critical reasoning.
-        </p>
-        <p class="muted small">Selected participants will be added to a WhatsApp group for announcements; topic disclosed 48 hours before the event.</p>
+    <p class="lead">
+      The AIChE Southern Asia Parliamentary Debate Competition 2025 brings together student chapters to debate engineering and sustainability topics.
+    </p>
+
+    <div class="meta-row">
+      <div class="meta-left">
+        <p><strong>Date:</strong> 2 December 2025</p>
+        <p><strong>Time:</strong> 09:00 (GMT+6)</p>
+        <p><strong>Venue:</strong> Online (Zoom)</p>
       </div>
 
-      <div class="reg-cta">
-        <a class="btn" href="#" id="register-cta" aria-label="Register for the debate">Register Now</a>
+      <div class="meta-right">
+        <a href="#" class="btn" id="register-cta">Register Now</a>
       </div>
     </div>
   </section>
 
   <!-- Event Information -->
-  <section id="info" tabindex="-1" aria-labelledby="info-heading">
+  <section id="event-info" aria-labelledby="info-heading">
     <h2 id="info-heading">Event Information</h2>
-    <p class="small muted">Event details sourced from the provided event brief. 0</p>
 
-    <p class="sub">Objective</p>
-    <p>To foster critical thinking, persuasive communication, and teamwork among AIChE student members through structured debates on engineering and sustainability topics.</p>
+    <p class="short"><strong>Objective:</strong> Foster critical thinking, persuasive communication, and teamwork among AIChE student members.</p>
 
-    <p class="sub">1. Structure &amp; Participation</p>
-    <ul>
-      <li><strong>Eligibility:</strong> Active AIChE student chapters in the Southern Asia region.</li>
-      <li><strong>Team Composition:</strong> Each participating chapter nominates two representatives: one pre-final year student and one final year student.</li>
-      <li><strong>Grouping:</strong> Random assignment to Team Government or Team Opposition. If uneven, extra chapter(s) placed in one team; scores normalized for fairness.</li>
-      <li><strong>Communication:</strong> All selected participants will be added to a dedicated WhatsApp group for updates and the topic will be disclosed 48 hours before the event.</li>
+    <ul class="compact">
+      <li><strong>Eligibility:</strong> Active AIChE student chapters, Southern Asia region.</li>
+      <li><strong>Team:</strong> Two representatives per chapter (one pre-final, one final year).</li>
+      <li><strong>Format:</strong> Parliamentary style. Speaking time: Speaker 1 — 2 min; Speaker 2 — 3 min.</li>
+      <li><strong>Judging (100 pts):</strong> Content & Logic (30), Team Coordination (25), Delivery (25), Relevance (20).</li>
+      <li><strong>Certificates:</strong> Digital certificates for all participants.</li>
     </ul>
-
-    <p class="sub">2. Debate Format</p>
-    <ul>
-      <li><strong>Style:</strong> Parliamentary format.</li>
-      <li><strong>Speaking Time:</strong> Each chapter gets 5 minutes total — Speaker 1 (Junior): 2 minutes; Speaker 2 (Senior): 3 minutes. Exceeding time → point deductions.</li>
-      <li><strong>Rebuttal Round:</strong> Optional (1 minute per team) if time allows.</li>
-    </ul>
-
-    <p class="sub">3. Judging Criteria (Total 100 points)</p>
-    <table class="table" role="table" aria-label="Judging criteria table">
-      <thead>
-        <tr>
-          <th scope="col">Criteria</th>
-          <th scope="col">Description</th>
-          <th scope="col">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Content &amp; Logic</td>
-          <td>Strength, structure, and depth of arguments</td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td>Team Coordination</td>
-          <td>Flow and balance between the two speakers</td>
-          <td>25</td>
-        </tr>
-        <tr>
-          <td>Delivery &amp; Confidence</td>
-          <td>Clarity, tone, and stage presence</td>
-          <td>25</td>
-        </tr>
-        <tr>
-          <td>Relevance &amp; Impact</td>
-          <td>Connection to engineering or sustainability issues</td>
-          <td>20</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p class="sub">4. Scoring &amp; Recognition</p>
-    <ul>
-      <li><strong>Evaluation:</strong> Judges from the AIChE Executive Committee.</li>
-      <li><strong>Awards:</strong> Winning Team (total points) and Best Speaker (individual).</li>
-      <li><strong>Recognition:</strong> Winners featured on AIChE Executive Committee social media platforms.</li>
-    </ul>
-
-    <p class="sub">5. Participation Certificates</p>
-    <p>All participants will receive digital certificates from AIChE Southern Asia recognising their contribution and public speaking effort.</p>
-
-    <p class="sub">6. Impact &amp; Chapter Activity Points</p>
-    <p>Participating chapters will earn AIChE Activity Points contributing to annual report evaluation and strengthening active chapter status.</p>
   </section>
 
-  <!-- Event Organizers -->
-  <section id="organizers" tabindex="-1" aria-labelledby="org-heading">
-    <h2 id="org-heading">Event Organizers</h2>
-    <p class="muted small">Core team and primary responsibilities. Photos are placeholders — replace with real headshots where available (alt text provided).</p>
+  <!-- Organizers -->
+  <section id="organizers" aria-labelledby="org-heading">
+    <h2 id="org-heading">Organizers</h2>
 
-    <div class="grid" role="list">
-      <!-- Event Chair -->
-      <article class="card" role="listitem" aria-label="Event Chair: Md. Ajim Hossain">
-        <div class="avatar" aria-hidden="true" title="Md. Ajim Hossain">AH</div>
-        <div class="meta">
-          <div class="name">Md. Ajim Hossain</div>
-          <div class="role">Event Chair — Regional Chair, Southern Asia Regional Subcommittee, AIChE ESC</div>
+    <div class="grid" id="organizer-grid" role="list">
+      <article class="organizer" role="listitem">
+        <img src="ajim.jpg" alt="Md. Ajim Hossain (placeholder)">
+        <div class="info">
+          <h3>Md. Ajim Hossain</h3>
+          <p class="role">Event Chair — Regional Chair, Southern Asia Regional Subcommittee, AIChE ESC</p>
+          <p class="contact">ajim@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
 
-      <!-- Event Host -->
-      <article class="card" role="listitem" aria-label="Event Host: Ayushi Dwivedi">
-        <div class="avatar" aria-hidden="true" title="Ayushi Dwivedi">AD</div>
-        <div class="meta">
-          <div class="name">Ayushi Dwivedi</div>
-          <div class="role">Event Host — Regional Liaison, AIChE ESC</div>
+      <article class="organizer" role="listitem">
+        <img src="ayushi.jpg" alt="Ayushi Dwivedi (placeholder)">
+        <div class="info">
+          <h3>Ayushi Dwivedi</h3>
+          <p class="role">Event Host — Regional Liaison, AIChE ESC</p>
+          <p class="contact">ayushi@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
 
-      <!-- Timekeeper -->
-      <article class="card" role="listitem" aria-label="Timekeeper: Brahma Akshaya">
-        <div class="avatar" aria-hidden="true" title="Brahma Akshaya">BA</div>
-        <div class="meta">
-          <div class="name">Brahma Akshaya</div>
-          <div class="role">Timekeeper — Enforces debate time limits</div>
+      <article class="organizer" role="listitem">
+        <img src="brahma.jpg" alt="Brahma Akshaya (placeholder)">
+        <div class="info">
+          <h3>Brahma Akshaya</h3>
+          <p class="role">Timekeeper — Enforces debate time limits</p>
+          <p class="contact">brahma@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
 
-      <!-- Group Coordinator -->
-      <article class="card" role="listitem" aria-label="Group Coordinator: Shivaguru">
-        <div class="avatar" aria-hidden="true" title="Shivaguru">S</div>
-        <div class="meta">
-          <div class="name">Shivaguru</div>
-          <div class="role">Group Coordinator — Manages WhatsApp, point of contact for participants</div>
+      <article class="organizer" role="listitem">
+        <img src="shivaguru.jpg" alt="Shivaguru (placeholder)">
+        <div class="info">
+          <h3>Shivaguru</h3>
+          <p class="role">Group Coordinator — Point of contact for participants</p>
+          <p class="contact">shivaguru@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
 
-      <!-- Technical Support -->
-      <article class="card" role="listitem" aria-label="Technical Support: Dev Jangit">
-        <div class="avatar" aria-hidden="true" title="Dev Jangit">DJ</div>
-        <div class="meta">
-          <div class="name">Dev Jangit</div>
-          <div class="role">Technical Support — Handle Zoom / technical issues</div>
+      <article class="organizer" role="listitem">
+        <img src="dev.jpg" alt="Dev Jangit (placeholder)">
+        <div class="info">
+          <h3>Dev Jangit</h3>
+          <p class="role">Technical Support — Handles Zoom & technical issues</p>
+          <p class="contact">dev@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
-
-      <!-- Outreach Team -->
-      <article class="card" role="listitem" aria-label="Outreach Team: Aditi & Isha">
-        <div class="avatar" aria-hidden="true" title="Aditi & Isha">AI</div>
-        <div class="meta">
-          <div class="name">Aditi &amp; Isha</div>
-          <div class="role">Outreach Team — Promotion &amp; engagement</div>
+<article class="organizer" role="listitem">
+        <img src="aditi-isha.jpg" alt="Aditi & Isha (placeholder)">
+        <div class="info">
+          <h3>Aditi &amp; Isha</h3>
+          <p class="role">Outreach Team — Promotion & engagement</p>
+          <p class="contact">aditiisha@example.com · +8801XXXXXXXXX</p>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- Responsibilities Summary -->
-  <section id="summary" tabindex="-1" aria-labelledby="summary-heading">
-    <h2 id="summary-heading">Summary of Responsibilities</h2>
-
-    <table class="table" role="table" aria-label="Summary of responsibilities">
-      <thead>
-        <tr>
-          <th scope="col">Role</th>
-          <th scope="col">Name</th>
-          <th scope="col">Key Responsibility</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Event Chair</td><td>Md. Ajim Hossain</td><td>Vision, leadership, ESC coordination</td></tr>
-        <tr><td>Event Host</td><td>Ayushi Dwivedi</td><td>Hosts Zoom, moderates debate</td></tr>
-        <tr><td>Timekeeper</td><td>Brahma Akshaya</td><td>Enforces time limits</td></tr>
-        <tr><td>Group Coordinator</td><td>Shivaguru</td><td>Manages WhatsApp, sends topic</td></tr>
-        <tr><td>Technical Support</td><td>Dev Jangit</td><td>Fixes Zoom/tech issues</td></tr>
-        <tr><td>Outreach Team</td><td>Aditi &amp; Isha</td><td>Promotion &amp; engagement</td></tr>
-      </tbody>
-    </table>
-  </section>
-
 </main>
 
-<footer role="contentinfo">
-  <div id="logo" class="logo" role="img" aria-label="AIChE ESC logo (placeholder)">
-    AIChE ESC
-  </div>
-  <div class="small muted">© 2025 AIChE Southern Asia</div>
+<footer>
+  <p>© 2025 AIChE Southern Asia</p>
 </footer>
 
-<script>
-  /* Smooth reveal on scroll using Intersection Observer */
-  (function(){
-    const sections = document.querySelectorAll('main section');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          // we can unobserve to improve performance
-          obs.unobserve(e.target);
-        }
-      });
-    }, {threshold: 0.12});
-    sections.forEach(s => obs.observe(s));
-
-    // Logo load animation
-    window.addEventListener('load', () => {
-      const logo = document.getElementById('logo');
-      setTimeout(()=> logo.classList.add('load'), 160);
-    });
-
-    // Smooth scroll for internal hash links (register buttons anchor)
-    function smoothScrollTo(el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 12;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-    document.getElementById('register-top').addEventListener('click', (ev) => {
-      // If register leads to external link, default; currently '#' -> scroll to registration
-      ev.preventDefault();
-      const reg = document.getElementById('registration');
-      if (reg) smoothScrollTo(reg);
-      document.getElementById('register-cta').focus();
-    });
-    document.getElementById('register-cta').addEventListener('click', (ev) => {
-      ev.preventDefault();
-      // placeholder: same behavior
-      alert('Registration link placeholder. Replace href="#" with your registration form URL.');
-    });
-
-    // Accessibility: allow keyboard reveal of card hover states
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(c => {
-      c.tabIndex = 0;
-    });
-
-  })();
-</script>
-
+<script src="script.js"></script>
 </body>
-                                                 </html>
+</html>
