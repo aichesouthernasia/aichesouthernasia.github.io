@@ -1,11 +1,13 @@
+// script.js
+// Small behavior code (register button placeholder)
+
 document.addEventListener('DOMContentLoaded', () => {
   const registerBtn = document.getElementById('register-cta');
+  if (!registerBtn) return;
 
-  if (registerBtn) {
-    registerBtn.addEventListener('click', e => {
-      e.preventDefault();
-      // Replace this with actual registration form URL
-      alert('Registration form link not yet added.');
-    });
-  }
+  registerBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Replace with real registration URL when ready:
+    window.location.href = '#';
+  });
 });
