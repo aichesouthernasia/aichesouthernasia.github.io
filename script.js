@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!registerBtn) return;
 
   registerBtn.addEventListener('click', (e) => {
-    e.preventDefault();
     // Replace with real registration URL when ready:
     window.location.href = '#';
   });
