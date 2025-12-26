@@ -133,3 +133,21 @@ footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 1
   transform: scale(0.97);
   transition: transform 0.1s ease-out;
 }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray, adjust to match your design */
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
